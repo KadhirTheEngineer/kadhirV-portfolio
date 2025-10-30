@@ -1,0 +1,56 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const experiences = (await getCollection('experience')).sort(
+	(a, b) => b.data.startDate.valueOf() - a.data.startDate.valueOf()
+);
+---
+
+<Layout title="Experience | Electrical Engineering Portfolio" description="Timeline of engineering roles and impact across energy, robotics, and IoT products.">
+	<section class="container experience-page">
+		<div class="section-heading">
+			<h2>Experience</h2>
+			<span>Professional Timeline</span>
+		</div>
+		<div class="experience-timeline experience-timeline--page">
+			<div class="experience-line" aria-hidden="true"></div>
+			{experiences.map((exp, index) => {
+				const position = index % 2 === 0 ? 'left' : 'right';
+				const start = new Intl.DateTimeFormat('en', { month: 'short', year: 'numeric' }).format(
+					exp.data.startDate
+				);
+				const endLabel = exp.data.endDate
+					? new Intl.DateTimeFormat('en', { month: 'short', year: 'numeric' }).format(exp.data.endDate)
+					: 'Present';
+				return (
+					<article class={`experience-item ${position}`}>
+						<div class="experience-dot" aria-hidden="true"></div>
+						<a class="experience-card" href={`/experience/${exp.slug}`}>
+							<header>
+								<p class="experience-date">
+									<span>{start}</span>
+									<span class="dash">—</span>
+									<span>{endLabel}</span>
+								</p>
+								<h3>
+									{exp.data.role}
+									<span>@ {exp.data.company}</span>
+								</h3>
+								{exp.data.location && <p class="experience-location">{exp.data.location}</p>}
+							</header>
+							<p class="experience-summary">{exp.data.summary}</p>
+							{exp.data.tags.length > 0 && (
+								<ul class="experience-tags">
+									{exp.data.tags.map((tag) => (
+										<li>{tag}</li>
+									))}
+								</ul>
+							)}
+						</a>
+					</article>
+				);
+			})}
+		</div>
+	</section>
+</Layout>

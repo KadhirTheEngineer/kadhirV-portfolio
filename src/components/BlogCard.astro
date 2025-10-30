@@ -1,0 +1,55 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+	entry: CollectionEntry<'blog'>;
+}
+
+const { entry } = Astro.props as Props;
+const { title, summary, publishedAt, tags = [] } = entry.data;
+const formattedDate = new Intl.DateTimeFormat('en', {
+	month: 'short',
+	day: 'numeric',
+	year: 'numeric',
+}).format(publishedAt);
+---
+
+<article class="card">
+	<header>
+		<div class="meta">
+			<span>{formattedDate}</span>
+		</div>
+		<h3>
+			<a href={`/blog/${entry.slug}`}>{title}</a>
+		</h3>
+	</header>
+	<p>{summary}</p>
+	{tags.length > 0 && (
+		<div class="tag-list" aria-label="Topics">
+			{tags.map((tag) => (
+				<span class="tag">{tag}</span>
+			))}
+		</div>
+	)}
+	<p style="margin-top: auto;">
+		<a class="project-link" href={`/blog/${entry.slug}`}>Read article</a>
+	</p>
+</article>
+
+<style>
+	.project-link {
+		font-size: 0.8rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.12em;
+		color: var(--color-muted);
+		border-bottom: 1px solid rgba(148, 163, 184, 0.24);
+		padding-bottom: 0.25rem;
+	}
+
+	.project-link:hover,
+	.project-link:focus-visible {
+		color: var(--color-accent);
+		border-color: rgba(56, 189, 248, 0.4);
+	}
+</style>

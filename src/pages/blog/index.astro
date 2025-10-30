@@ -1,0 +1,31 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import BlogCard from '../../components/BlogCard.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf()
+);
+---
+
+<Layout title="Blog | Electrical Engineering Portfolio" description="Technical writing and notes from the lab.">
+	<section class="container">
+		<div class="section-heading">
+			<h2>Blog</h2>
+			<span>Latest Writing</span>
+		</div>
+		<p style="color: var(--color-muted); max-width: 68ch;">
+			Field notes, design patterns, and teardown write-ups focused on embedded systems, power
+			engineering, and hardware bring-up.
+		</p>
+		{posts.length ? (
+			<div class="grid" style="margin-top: 2.5rem;">
+				{posts.map((post) => (
+					<BlogCard entry={post} />
+				))}
+			</div>
+		) : (
+			<p>No posts published yet. Add one in <code>src/content/blog</code>.</p>
+		)}
+	</section>
+</Layout>

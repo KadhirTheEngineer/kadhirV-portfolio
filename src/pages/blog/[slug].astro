@@ -1,0 +1,139 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import type { CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
+
+type BlogEntry = CollectionEntry<'blog'>;
+
+export const getStaticPaths = async () => {
+	const posts = await getCollection('blog');
+	return posts.map((post) => ({
+		params: { slug: post.slug },
+		props: { post },
+	}));
+};
+
+const { post } = Astro.props as { post: BlogEntry };
+const { Content } = await post.render();
+
+const { title, summary, publishedAt, tags = [] } = post.data;
+const formattedDate = new Intl.DateTimeFormat('en', {
+	month: 'long',
+	day: 'numeric',
+	year: 'numeric',
+}).format(publishedAt);
+---
+
+<Layout title={`${title} | Blog`} description={summary}>
+	<article class="container blog-detail">
+		<a class="back-link" href="/blog">&larr; Back to blog</a>
+		<header>
+			<div class="meta">
+				<span>{formattedDate}</span>
+				{tags.length > 0 && (
+					<div class="tag-list">
+						{tags.map((tag) => (
+							<span class="tag">{tag}</span>
+						))}
+					</div>
+				)}
+			</div>
+			<h1>{title}</h1>
+			<p class="blog-summary">{summary}</p>
+		</header>
+		<section class="blog-body">
+			<Content />
+		</section>
+	</article>
+</Layout>
+
+<style>
+	.blog-detail {
+		display: grid;
+		gap: 2.25rem;
+	}
+
+	.blog-detail header {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		padding: 2.25rem;
+		background: var(--color-card);
+		border-radius: var(--radius-lg);
+		border: 1px solid rgba(148, 163, 184, 0.16);
+		box-shadow: var(--shadow-lg);
+	}
+
+	.blog-detail h1 {
+		margin: 0;
+		font-size: clamp(2rem, 4vw, 2.8rem);
+		letter-spacing: -0.02em;
+	}
+
+	.blog-summary {
+		margin: 0;
+		color: var(--color-muted);
+		max-width: 75ch;
+	}
+
+	.blog-body {
+		padding: 2.25rem;
+		background: rgba(15, 23, 42, 0.82);
+		border-radius: var(--radius-lg);
+		border: 1px solid rgba(148, 163, 184, 0.14);
+		box-shadow: var(--shadow-md);
+		line-height: 1.7;
+	}
+
+	.blog-body :global(h2),
+	.blog-body :global(h3) {
+		letter-spacing: -0.01em;
+	}
+
+	.blog-body :global(p),
+	.blog-body :global(li) {
+		color: var(--color-muted);
+	}
+
+	.blog-body :global(code) {
+		background: rgba(148, 163, 184, 0.12);
+		padding: 0.2rem 0.45rem;
+		border-radius: 4px;
+	}
+
+	.blog-body :global(pre) {
+		background: rgba(15, 23, 42, 0.9);
+		border: 1px solid rgba(148, 163, 184, 0.2);
+		border-radius: var(--radius-sm);
+		padding: 1rem;
+		overflow-x: auto;
+	}
+
+	.back-link {
+		color: var(--color-muted);
+		font-size: 0.85rem;
+		text-transform: uppercase;
+		letter-spacing: 0.16em;
+		display: inline-block;
+		margin-bottom: -1rem;
+		position: sticky;
+		top: 5.5rem;
+	}
+
+	.back-link:hover,
+	.back-link:focus-visible {
+		color: var(--color-accent);
+	}
+
+	@media (max-width: 720px) {
+		.blog-detail header,
+		.blog-body {
+			padding: 1.75rem;
+		}
+
+		.back-link {
+			position: static;
+			margin-bottom: 0;
+		}
+	}
+</style>

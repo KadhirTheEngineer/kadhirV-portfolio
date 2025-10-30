@@ -1,11 +1,236 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import BlogCard from '../components/BlogCard.astro';
+import portrait from '../assets/profile-placeholder.svg';
+import { getCollection } from 'astro:content';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const projects = (await getCollection('projects'))
+	.sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
+const featuredProjects = projects.filter((item) => item.data.featured).slice(0, 3);
+
+const blogPosts = (await getCollection('blog'))
+	.sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf())
+	.slice(0, 3);
+
+const experiences = (await getCollection('experience')).sort(
+	(a, b) => b.data.startDate.valueOf() - a.data.startDate.valueOf()
+);
+
+const heroSummary =
+	"From architecture to field validation, I translate requirements into resilient, measurable results for energy, instrumentation, and sensing platforms.";
+const rotatingAdjectives = [
+	{ article: 'an', word: 'engineer' },
+	{ article: 'a', word: 'maker' },
+	{ article: 'an', word: 'innovator' },
+	{ article: 'a', word: 'problem solver' },
+	{ article: 'a', word: 'student' },
+];
+const adjectivesJSON = JSON.stringify(rotatingAdjectives);
 ---
 
-<Layout>
-	<Welcome />
+<Layout
+	title="Electrical Engineering Portfolio"
+	description="Electrical engineering portfolio with embedded systems, power electronics projects, and technical writing."
+>
+	<section class="hero" id="home">
+		<div class="hero-scale" data-hero-scale>
+			<div class="container hero-grid">
+				<div class="hero-intro">
+					<p class="hero-overline">Electronics & Systems Engineer</p>
+					<h1 class="hero-title">
+						<span class="hero-greeting">Hey, I'm</span>
+						<span class="hero-name">Kadhir</span>
+					</h1>
+					<p class="hero-tagline">
+						I'm <span class="hero-rotator" data-rotator>
+							{`${rotatingAdjectives[0].article} ${rotatingAdjectives[0].word}`}
+						</span>
+					</p>
+					<p class="hero-secondary">Crafting dependable hardware, firmware, and power systems beyond the lab.</p>
+					<p class="hero-summary">{heroSummary}</p>
+					<div class="hero-actions">
+						<a class="button primary" href="/projects">View projects</a>
+						<a class="button secondary" href="/experience">Experience</a>
+					</div>
+				</div>
+				<div class="hero-portrait">
+					<figure class="portrait-frame">
+						<img src={portrait.src} alt="Portrait of Kadhir" loading="lazy" decoding="async" />
+					</figure>
+					<ul class="hero-highlights">
+						<li>
+							<span class="label">Focus</span>
+							<span>Embedded energy systems &amp; rugged instrumentation</span>
+						</li>
+						<li>
+							<span class="label">Location</span>
+							<span>Based in Austin, TX — collaborating remotely</span>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="projects" class="container">
+		<div class="section-heading">
+			<h2>Projects</h2>
+			<span>Selected Work</span>
+		</div>
+		<div class="grid">
+			{(featuredProjects.length ? featuredProjects : projects.slice(0, 3)).map((project) => (
+				<ProjectCard entry={project} />
+			))}
+		</div>
+		{projects.length > 3 && (
+			<p style="margin-top: 1.5rem;">
+				<a class="button secondary" href="/projects">Browse all projects</a>
+			</p>
+		)}
+	</section>
+
+	<section id="blog" class="container">
+		<div class="section-heading">
+			<h2>Blog</h2>
+			<span>Notes &amp; Learnings</span>
+		</div>
+		{blogPosts.length ? (
+			<div class="grid">
+				{blogPosts.map((post) => (
+					<BlogCard entry={post} />
+				))}
+			</div>
+		) : (
+			<p>No posts yet. Add one in <code>src/content/blog</code>.</p>
+		)}
+	</section>
+
+	<section id="experience" class="container experience-section">
+		<div class="section-heading">
+			<h2>Experience</h2>
+			<span>Journey So Far</span>
+		</div>
+		<div class="experience-timeline">
+			<div class="experience-line" aria-hidden="true"></div>
+			{experiences.map((exp, index) => {
+				const position = index % 2 === 0 ? 'left' : 'right';
+				const start = new Intl.DateTimeFormat('en', { month: 'short', year: 'numeric' }).format(
+					exp.data.startDate
+				);
+				const endLabel = exp.data.endDate
+					? new Intl.DateTimeFormat('en', { month: 'short', year: 'numeric' }).format(exp.data.endDate)
+					: 'Present';
+				return (
+					<article class={`experience-item ${position}`}>
+						<div class="experience-dot" aria-hidden="true"></div>
+						<a class="experience-card" href={`/experience/${exp.slug}`}>
+							<header>
+								<p class="experience-date">
+									<span>{start}</span>
+									<span class="dash">—</span>
+									<span>{endLabel}</span>
+								</p>
+								<h3>
+									{exp.data.role}
+									<span> @ {exp.data.company}</span>
+								</h3>
+								{exp.data.location && <p class="experience-location">{exp.data.location}</p>}
+							</header>
+							<p class="experience-summary">{exp.data.summary}</p>
+							{exp.data.tags.length > 0 && (
+								<ul class="experience-tags">
+									{exp.data.tags.map((tag) => (
+										<li>{tag}</li>
+									))}
+								</ul>
+							)}
+						</a>
+					</article>
+				);
+			})}
+		</div>
+		<p class="experience-cta">
+			Want the full story? <a href="/experience">Browse the complete experience timeline →</a>
+		</p>
+	</section>
+	<script type="module" data-words={adjectivesJSON}>
+		const initHero = () => {
+			const script = document.querySelector('script[data-words]');
+			const adjectives = JSON.parse(script?.dataset.words ?? '[]');
+			const rotator = document.querySelector('[data-rotator]');
+			const scaleTarget = document.querySelector('[data-hero-scale]');
+
+			let index = 0;
+			let timer;
+
+			const tick = () => {
+				if (!rotator || adjectives.length <= 1) {
+					return;
+				}
+				rotator.classList.add('is-changing');
+				window.setTimeout(() => {
+					index = (index + 1) % adjectives.length;
+					const next = adjectives[index];
+					rotator.textContent = `${next.article} ${next.word}`;
+					rotator.classList.remove('is-changing');
+				}, 220);
+			};
+
+			if (rotator && adjectives.length > 1) {
+				const current = adjectives[0];
+				rotator.textContent = `${current.article} ${current.word}`;
+				timer = window.setInterval(tick, 2600);
+				document.addEventListener('visibilitychange', () => {
+					if (document.hidden && timer) {
+						window.clearInterval(timer);
+						timer = undefined;
+					} else if (!document.hidden && !timer) {
+						timer = window.setInterval(tick, 2600);
+					}
+				});
+			}
+
+			if (scaleTarget) {
+				scaleTarget.style.setProperty('--hero-progress', '0');
+
+				let heroTop = 0;
+				let heroHeight = 0;
+				const shrinkDistance = () => heroHeight * 0.75 || 1;
+				const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
+				const measure = () => {
+					const rect = scaleTarget.getBoundingClientRect();
+					heroHeight = scaleTarget.offsetHeight || rect.height;
+					heroTop = window.scrollY + rect.top;
+				};
+
+				const updateScale = () => {
+					if (!heroHeight) return;
+					const scroll = window.scrollY;
+					const progress = clamp((scroll - heroTop) / shrinkDistance(), 0, 1);
+					scaleTarget.style.setProperty('--hero-progress', progress.toFixed(4));
+				};
+
+				measure();
+				updateScale();
+
+				window.addEventListener('resize', () => {
+					measure();
+					updateScale();
+				});
+				window.addEventListener('scroll', updateScale, { passive: true });
+				window.addEventListener('load', () => {
+					measure();
+					updateScale();
+				});
+			}
+		};
+
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', initHero, { once: true });
+		} else {
+			initHero();
+		}
+	</script>
 </Layout>

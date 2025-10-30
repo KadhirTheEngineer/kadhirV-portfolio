@@ -1,0 +1,27 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+
+const projects = (await getCollection('projects')).sort(
+	(a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf()
+);
+---
+
+<Layout title="Projects | Electrical Engineering Portfolio" description="Electrical engineering project portfolio.">
+	<section class="container">
+		<div class="section-heading">
+			<h2>Projects</h2>
+			<span>All Work</span>
+		</div>
+		<p style="color: var(--color-muted); max-width: 70ch;">
+			A collection of prototypes, production launches, and research efforts. Each case study dives into requirements,
+			engineering trade-offs, and the measurable impact from the final system.
+		</p>
+		<div class="grid" style="margin-top: 2.5rem;">
+			{projects.map((project) => (
+				<ProjectCard entry={project} />
+			))}
+		</div>
+	</section>
+</Layout>

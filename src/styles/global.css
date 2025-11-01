@@ -14,19 +14,19 @@
 	color-scheme: dark;
 	--font-body: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
 	--font-heading: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
-	--color-bg: #050b1d;
-	--color-surface: rgba(5, 11, 29, 0.8);
-	--color-card: rgba(10, 19, 45, 0.9);
-	--color-text: #e8f1ff;
-	--color-muted: #7b8bab;
-	--color-accent: #5cc8ff;
-	--color-accent-soft: rgba(92, 200, 255, 0.2);
+	--color-bg: #040814;
+	--color-surface: #080f24;
+	--color-card: #0d152e;
+	--color-text: #dde6fb;
+	--color-muted: #7b89a8;
+	--color-accent: #58b7ff;
+	--color-accent-soft: rgba(88, 183, 255, 0.18);
 	--radius-lg: 18px;
 	--radius-md: 14px;
 	--radius-sm: 10px;
-	--shadow-lg: 0 24px 48px rgba(15, 23, 42, 0.32);
-	--shadow-md: 0 18px 38px rgba(15, 23, 42, 0.28);
-	--header-height: 72px;
+	--shadow-lg: 0 24px 48px rgba(4, 7, 16, 0.48);
+	--shadow-md: 0 18px 38px rgba(6, 10, 22, 0.42);
+	--header-height: 84px;
 	background-color: var(--color-bg);
 }
 
@@ -38,11 +38,7 @@ body {
 	margin: 0;
 	min-height: 100vh;
 	font-family: var(--font-body);
-	background:
-		radial-gradient(circle at top left, rgba(92, 200, 255, 0.17), transparent 48%),
-		radial-gradient(circle at 20% 80%, rgba(124, 58, 237, 0.22), transparent 42%),
-		radial-gradient(circle at bottom right, rgba(32, 80, 255, 0.16), transparent 58%),
-		var(--color-bg);
+	background: var(--color-bg);
 	color: var(--color-text);
 	line-height: 1.6;
 }
@@ -70,16 +66,17 @@ a:focus-visible {
 	position: sticky;
 	top: 0;
 	z-index: 10;
-	backdrop-filter: blur(16px);
-	background: rgba(15, 23, 42, 0.75);
-	border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+	backdrop-filter: blur(18px);
+	background: rgba(6, 10, 22, 0.92);
+	border-bottom: 1px solid rgba(116, 134, 170, 0.18);
 }
 
 .site-header .container {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 1.25rem 0;
+	padding: 1.65rem 0;
+	gap: clamp(1.5rem, 4vw, 2.5rem);
 }
 
 .site-header .brand {
@@ -87,13 +84,13 @@ a:focus-visible {
 	font-weight: 700;
 	letter-spacing: 0.08em;
 	text-transform: uppercase;
-	font-size: 0.95rem;
+	font-size: 1.1rem;
 	color: var(--color-accent);
 }
 
 .site-header nav ul {
 	display: flex;
-	gap: 1.75rem;
+	gap: clamp(1.8rem, 4vw, 2.6rem);
 	list-style: none;
 	margin: 0;
 	padding: 0;
@@ -103,8 +100,9 @@ a:focus-visible {
 	font-weight: 500;
 	letter-spacing: 0.04em;
 	text-transform: uppercase;
-	font-size: 0.75rem;
+	font-size: 0.86rem;
 	color: var(--color-muted);
+	padding: 0.35rem 0;
 	transition: color 0.2s ease, transform 0.2s ease;
 }
 
@@ -160,9 +158,11 @@ section {
 	position: relative;
 	width: min(1200px, 94vw);
 	margin: 0 auto;
+	margin-bottom: calc(clamp(0.5rem, 4vw, 1.5rem) + var(--hero-extra-space, 0px));
 	overflow: visible;
 	--hero-progress: 0;
-	transform: scale(calc(1.65 - 0.32 * var(--hero-progress)));
+	--hero-extra-space: 0px;
+	transform: scale(calc(1.25 - 0.32 * var(--hero-progress)));
 	transform-origin: center top;
 	transition: transform 0.3s ease;
 	will-change: transform;
@@ -274,7 +274,7 @@ section {
 	margin: 0;
 	border-radius: 28px;
 	overflow: hidden;
-	background: radial-gradient(circle at center, rgba(56, 189, 248, 0.12), transparent 65%);
+	background: rgba(88, 183, 255, 0.08);
 	border: 1px solid rgba(148, 163, 184, 0.24);
 	box-shadow:
 		0 24px 60px rgba(3, 10, 30, 0.55),
@@ -338,7 +338,7 @@ section {
 	top: 0;
 	bottom: 0;
 	width: 2px;
-	background: linear-gradient(180deg, rgba(92, 200, 255, 0.3), rgba(124, 58, 237, 0.22));
+	background: rgba(88, 183, 255, 0.45);
 	transform: translateX(-50%);
 }
 
@@ -490,15 +490,16 @@ section {
 }
 
 .button.primary {
-	background: linear-gradient(135deg, #38bdf8, #6366f1);
-	color: #0f172a;
-	box-shadow: 0 12px 32px rgba(56, 189, 248, 0.35);
+	background: var(--color-accent);
+	color: #031024;
+	box-shadow: 0 12px 28px rgba(88, 183, 255, 0.32);
 }
 
 .button.primary:hover,
 .button.primary:focus-visible {
 	transform: translateY(-2px);
-	box-shadow: 0 16px 36px rgba(99, 102, 241, 0.4);
+	background: #69c1ff;
+	box-shadow: 0 16px 34px rgba(88, 183, 255, 0.42);
 }
 
 .button.secondary {
@@ -622,6 +623,8 @@ section {
 
 	.hero-scale {
 		width: 100%;
+		margin-bottom: clamp(3rem, 16vw, 5rem);
+		--hero-extra-space: 0px;
 		transform: none !important;
 	}
 

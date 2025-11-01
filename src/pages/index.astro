@@ -193,11 +193,16 @@ const adjectivesJSON = JSON.stringify(rotatingAdjectives);
 
 			if (scaleTarget) {
 				scaleTarget.style.setProperty('--hero-progress', '0');
+				scaleTarget.style.setProperty('--hero-extra-space', '0px');
 
 				let heroTop = 0;
 				let heroHeight = 0;
 				const shrinkDistance = () => heroHeight * 0.75 || 1;
 				const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+				const baseScale = 1.25;
+				const scaleDelta = 0.32;
+				const compactQuery = window.matchMedia('(max-width: 720px)');
+				const isCompact = () => compactQuery.matches;
 
 				const measure = () => {
 					const rect = scaleTarget.getBoundingClientRect();
@@ -207,23 +212,36 @@ const adjectivesJSON = JSON.stringify(rotatingAdjectives);
 
 				const updateScale = () => {
 					if (!heroHeight) return;
+					if (isCompact()) {
+						scaleTarget.style.setProperty('--hero-progress', '0');
+						scaleTarget.style.setProperty('--hero-extra-space', '0px');
+						return;
+					}
 					const scroll = window.scrollY;
 					const progress = clamp((scroll - heroTop) / shrinkDistance(), 0, 1);
 					scaleTarget.style.setProperty('--hero-progress', progress.toFixed(4));
+					const scaleValue = baseScale - scaleDelta * progress;
+					const extraSpace = Math.max(0, heroHeight * (scaleValue - 1));
+					scaleTarget.style.setProperty('--hero-extra-space', `${extraSpace.toFixed(2)}px`);
 				};
 
 				measure();
 				updateScale();
 
-				window.addEventListener('resize', () => {
+				const handleResize = () => {
 					measure();
 					updateScale();
-				});
+				};
+
+				window.addEventListener('resize', handleResize);
 				window.addEventListener('scroll', updateScale, { passive: true });
-				window.addEventListener('load', () => {
-					measure();
-					updateScale();
-				});
+				window.addEventListener('load', handleResize);
+
+				if (compactQuery.addEventListener) {
+					compactQuery.addEventListener('change', handleResize);
+				} else if (compactQuery.addListener) {
+					compactQuery.addListener(handleResize);
+				}
 			}
 		};
 

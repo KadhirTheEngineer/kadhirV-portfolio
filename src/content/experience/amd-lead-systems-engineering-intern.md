@@ -20,4 +20,4 @@ tags:
 
 ## Scope
 
-I support AMD's LSE Desktop group by transforming early-silicon systems into reliable validation platforms, coordinating firmware tweaks, lab infrastructure, and documentation so engineers across silicon, BIOS, and platform teams can resolve issues faster.
+I support AMD's LSE Desktop group by helping build early-silicon validation platforms, coordinating firmware tweaks, lab infrastructure, and documentation so engineers across silicon, BIOS, DDR, and other platform teams can resolve issues faster.

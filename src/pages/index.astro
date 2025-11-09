@@ -30,14 +30,14 @@ const adjectivesJSON = JSON.stringify(rotatingAdjectives);
 ---
 
 <Layout
-	title="Electrical Engineering Portfolio"
-	description="Electrical engineering portfolio with embedded systems, power electronics projects, and technical writing."
+	title="Kadhir Vivekanandan's Portfolio"
+	description="just a chill guy documenting his chill projects and expereinces"
 >
 	<section class="hero" id="home">
 		<div class="hero-scale" data-hero-scale>
 			<div class="container hero-grid">
 				<div class="hero-intro">
-					<p class="hero-overline">Electronics & Systems Engineer</p>
+					<!-- <p class="hero-overline">Electronics & Systems Engineer</p> -->
 					<h1 class="hero-title">
 						<span class="hero-greeting">Hey, I'm</span>
 						<span class="hero-name">Kadhir</span>
@@ -133,7 +133,7 @@ const adjectivesJSON = JSON.stringify(rotatingAdjectives);
 								</p>
 								<h3>
 									{exp.data.role}
-									<span> @ {exp.data.company}</span>
+									<span class="experience-company">@ {exp.data.company}</span>
 								</h3>
 								{exp.data.location && <p class="experience-location">{exp.data.location}</p>}
 							</header>

@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
+const base = import.meta.env.BASE_URL;
 const experiences = (await getCollection('experience')).sort(
 	(a, b) => b.data.startDate.valueOf() - a.data.startDate.valueOf()
 );
@@ -26,7 +27,7 @@ const experiences = (await getCollection('experience')).sort(
 				return (
 					<article class={`experience-item ${position}`}>
 						<div class="experience-dot" aria-hidden="true"></div>
-						<a class="experience-card" href={`/experience/${exp.slug}`}>
+						<a class="experience-card" href={`${base}experience/${exp.slug}`}>
 							<header>
 								<p class="experience-date">
 									<span>{start}</span>

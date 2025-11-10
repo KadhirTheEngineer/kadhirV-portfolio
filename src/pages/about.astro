@@ -1,5 +1,8 @@
+
+const base = import.meta.env.BASE_URL;
 ---
 import Layout from '../layouts/Layout.astro';
+const base = import.meta.env.BASE_URL;
 ---
 
 <Layout title="About | Electrical Engineering Portfolio" description="Background, experience, and approach to electrical engineering work.">
@@ -93,7 +96,7 @@ import Layout from '../layouts/Layout.astro';
 			</p>
 			<div class="hero-actions">
 				<a class="button primary" href="mailto:you@example.com">Start a conversation</a>
-				<a class="button secondary" href="/projects">View my work</a>
+				<a class="button secondary" href={`${base}projects`}>View my work</a>
 			</div>
 		</section>
 	</section>

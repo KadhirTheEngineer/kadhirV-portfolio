@@ -6,15 +6,15 @@ startDate: 2024-05-01
 summary: Prototype and validate next-gen solar racing battery protection hardware and firmware.
 location: Austin, TX
 tags:
-  - Battery management
   - Embedded systems
   - CAN
+  - STM32
 ---
 
 ## Highlights
 
 - Led prototyping of a battery management system that triggers protective faults based on current, voltage, and temperature telemetry.
-- Designed an ESP32-driven wireless firmware update path that leverages the STM32 UART bootloader for OTA updates and debug.
+- develop an ESP32-driven wireless firmware update path that leverages the STM32 UART bootloader for OTA updates and debug.
 - Built CAN protocol tests on STM32 hardware, qualifying a cost-effective transceiver with C firmware and heartbeat diagnostics.
 - Incubated new features on rapid prototypes before they were integrated into production boards, boosting system reliability.
 

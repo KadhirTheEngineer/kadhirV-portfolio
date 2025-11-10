@@ -14,7 +14,7 @@ tags:
 
 ## Highlights
 
-- Built an Arduino-powered shock testing rig and companion Python analysis pipeline to characterize spring rates, damping, and pressure effects.
+- Built an Arduino-powered shock testing rig and companion Python analysis pipeline to characterize spring rates, damping, and pressure effects. [click here to check it out.](https://github.com/KadhirTheEngineer/Shock-Test-Parser)
 - Modeled suspension geometry in SolidWorks with parametric workflows that cut component mass by 12%.
 
 ## Scope

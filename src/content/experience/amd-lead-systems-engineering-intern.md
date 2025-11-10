@@ -6,9 +6,10 @@ startDate: 2025-09-18
 summary: Support platform validation efforts, create automated test routines & diagnostics to improve next-gen Ryzen validation workflow.
 location: Austin, TX
 tags:
-  - Systems engineering
-  - Hardware validation
-  - Lab automation
+  - UNIX development
+  - Bash scripting
+  - Automation
+  - Python
 ---
 
 ## Highlights

@@ -82,10 +82,11 @@ a:focus-visible {
 .site-header .brand {
 	font-family: var(--font-heading);
 	font-weight: 700;
-	letter-spacing: 0.08em;
+	letter-spacing: 0.05em;
 	text-transform: uppercase;
 	font-size: 1.1rem;
-	color: var(--color-accent);
+	color: var(--color-text);
+	text-decoration: none;
 }
 
 .site-header nav ul {
@@ -291,28 +292,47 @@ section {
 	list-style: none;
 	padding: 0;
 	margin: 0;
-	display: grid;
-	gap: 0.9rem;
-	width: min(320px, 100%);
+	display: flex;
+	justify-content: center;
+	gap: 0.85rem;
+	width: 100%;
 }
 
 .hero-highlights li {
-	display: grid;
-	gap: 0.35rem;
-	padding: 0.95rem 1.1rem;
-	border-radius: 18px;
-	background: rgba(255, 255, 255, 0.04);
-	border: 1px solid rgba(92, 114, 168, 0.24);
-	color: var(--color-text);
-	font-size: 0.9rem;
-	line-height: 1.5;
+	margin: 0;
 }
 
-.hero-highlights .label {
-	font-size: 0.7rem;
-	text-transform: uppercase;
-	letter-spacing: 0.22em;
-	color: var(--color-muted);
+.hero-socials {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 0.75rem;
+	width: 100%;
+}
+
+.hero-socials a {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 48px;
+	height: 48px;
+	border-radius: 999px;
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	background: rgba(255, 255, 255, 0.05);
+	transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.hero-socials a:hover,
+.hero-socials a:focus-visible {
+	transform: translateY(-2px);
+	border-color: rgba(92, 200, 255, 0.6);
+	background: rgba(92, 200, 255, 0.15);
+}
+
+.hero-socials svg {
+	width: 22px;
+	height: 22px;
+	fill: currentColor;
 }
 
 .experience-page {

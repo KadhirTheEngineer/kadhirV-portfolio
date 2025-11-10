@@ -12,6 +12,8 @@ tech:
 featured: false
 links:
   source: https://github.com/dch777/codefest2021
+previewImage: ../../assets/projects/nurture.svg
+previewImageAlt: Gradient artwork for the Nurture shelter map project
 ---
 
 ## Summary

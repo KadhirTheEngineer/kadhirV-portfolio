@@ -16,12 +16,13 @@ export const getStaticPaths = async () => {
 const { post } = Astro.props as { post: BlogEntry };
 const { Content } = await post.render();
 
-const { title, summary, publishedAt, tags = [] } = post.data;
+const { title, summary, publishedAt, tags = [], previewImage, previewImageAlt } = post.data;
 const formattedDate = new Intl.DateTimeFormat('en', {
 	month: 'long',
 	day: 'numeric',
 	year: 'numeric',
 }).format(publishedAt);
+const previewAlt = previewImageAlt ?? `${title} preview image`;
 ---
 
 <Layout title={`${title} | Blog`} description={summary}>
@@ -40,6 +41,18 @@ const formattedDate = new Intl.DateTimeFormat('en', {
 			</div>
 			<h1>{title}</h1>
 			<p class="blog-summary">{summary}</p>
+			{previewImage && (
+				<figure class="blog-preview">
+					<img
+						src={previewImage.src}
+						width={previewImage.width}
+						height={previewImage.height}
+						alt={previewAlt}
+						loading="lazy"
+						decoding="async"
+					/>
+				</figure>
+			)}
 		</header>
 		<section class="blog-body">
 			<Content />
@@ -74,6 +87,22 @@ const formattedDate = new Intl.DateTimeFormat('en', {
 		margin: 0;
 		color: var(--color-muted);
 		max-width: 75ch;
+	}
+
+	.blog-preview {
+		margin: 0;
+		border-radius: var(--radius-md);
+		overflow: hidden;
+		box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+		border: 1px solid rgba(148, 163, 184, 0.15);
+		background: rgba(8, 14, 35, 0.9);
+	}
+
+	.blog-preview img {
+		display: block;
+		width: 100%;
+		height: auto;
+		object-fit: cover;
 	}
 
 	.blog-body {

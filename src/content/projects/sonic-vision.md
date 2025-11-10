@@ -8,6 +8,8 @@ tech:
   - SolidWorks
   - Embedded Systems
 featured: false
+previewImage: ../../assets/projects/sonic-vision.svg
+previewImageAlt: Gradient card for the Sonic Vision haptic wearable
 ---
 
 ## Summary

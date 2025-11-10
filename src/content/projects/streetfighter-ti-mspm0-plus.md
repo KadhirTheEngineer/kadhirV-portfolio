@@ -9,6 +9,8 @@ tech:
   - UART
   - Embedded Graphics
 featured: false
+previewImage: ../../assets/projects/streetfighter-ti-mspm0-plus.svg
+previewImageAlt: Gradient card for the Street Fighter MSPM0+ port
 ---
 
 ## Summary

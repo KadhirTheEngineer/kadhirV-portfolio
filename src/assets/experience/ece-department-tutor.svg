@@ -1,0 +1,15 @@
+<svg width="640" height="360" viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g3" x1="0" y1="0" x2="640" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0fd976" />
+      <stop offset="1" stop-color="#0a6adf" />
+    </linearGradient>
+  </defs>
+  <rect width="640" height="360" rx="28" fill="url(#g3)" />
+  <path d="M120 120h400v160H120z" fill="rgba(0, 10, 40, 0.35)" stroke="rgba(255,255,255,0.35)" stroke-width="2" />
+  <line x1="160" y1="160" x2="480" y2="160" stroke="#9fffd4" stroke-width="6" stroke-linecap="round" />
+  <line x1="160" y1="200" x2="420" y2="200" stroke="#c7e9ff" stroke-width="6" stroke-linecap="round" />
+  <line x1="160" y1="240" x2="360" y2="240" stroke="#fef7d1" stroke-width="6" stroke-linecap="round" />
+  <text x="60" y="90" font-family="'Inter', 'Segoe UI', sans-serif" font-size="26" font-weight="600" fill="#ffffff">ECE Department Tutor</text>
+  <text x="60" y="320" font-family="'Inter', 'Segoe UI', sans-serif" font-size="20" fill="#dbfff2">Analog & embedded lab mentoring</text>
+</svg>

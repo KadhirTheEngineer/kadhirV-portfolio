@@ -13,7 +13,11 @@ const {
 	publishedAt,
 	links,
 	featured = false,
+	previewImage,
+	previewImageAlt,
 } = entry.data;
+
+const previewAlt = previewImageAlt ?? `${title} preview image`;
 
 const formattedDate = new Intl.DateTimeFormat('en', { month: 'short', year: 'numeric' }).format(
 	publishedAt
@@ -21,36 +25,50 @@ const formattedDate = new Intl.DateTimeFormat('en', { month: 'short', year: 'num
 ---
 
 <article class="card">
-	<header>
-		<div class="meta">
-			<span>{formattedDate}</span>
-			{featured && <span class="pill">Featured</span>}
-		</div>
-		<h3>
-			<a href={`/projects/${entry.slug}`}>{title}</a>
-		</h3>
-	</header>
-	<p>{description}</p>
-	{tech.length > 0 && (
-		<div class="tag-list" aria-label="Technology used">
-			{tech.map((item) => (
-				<span class="tag">{item}</span>
-			))}
-		</div>
+	{previewImage && (
+		<figure class="card-media">
+			<img
+				src={previewImage.src}
+				width={previewImage.width}
+				height={previewImage.height}
+				alt={previewAlt}
+				loading="lazy"
+				decoding="async"
+			/>
+		</figure>
 	)}
-	<footer class="project-links">
-		<a class="project-link" href={`/projects/${entry.slug}`}>View project</a>
-		{links?.live && (
-			<a class="project-link" href={links.live} rel="noopener noreferrer" target="_blank">
-				Live demo
-			</a>
+	<div class="card-body">
+		<header>
+			<div class="meta">
+				<span>{formattedDate}</span>
+				{featured && <span class="pill">Featured</span>}
+			</div>
+			<h3>
+				<a href={`/projects/${entry.slug}`}>{title}</a>
+			</h3>
+		</header>
+		<p>{description}</p>
+		{tech.length > 0 && (
+			<div class="tag-list" aria-label="Technology used">
+				{tech.map((item) => (
+					<span class="tag">{item}</span>
+				))}
+			</div>
 		)}
-		{links?.source && (
-			<a class="project-link" href={links.source} rel="noopener noreferrer" target="_blank">
-				Source
-			</a>
-		)}
-	</footer>
+		<footer class="project-links">
+			<a class="project-link" href={`/projects/${entry.slug}`}>View project</a>
+			{links?.live && (
+				<a class="project-link" href={links.live} rel="noopener noreferrer" target="_blank">
+					Live demo
+				</a>
+			)}
+			{links?.source && (
+				<a class="project-link" href={links.source} rel="noopener noreferrer" target="_blank">
+					Source
+				</a>
+			)}
+		</footer>
+	</div>
 </article>
 
 <style>

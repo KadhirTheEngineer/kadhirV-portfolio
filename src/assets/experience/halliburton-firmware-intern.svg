@@ -1,0 +1,15 @@
+<svg width="640" height="360" viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g2" x1="0" y1="0" x2="640" y2="360" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffb347" />
+      <stop offset="1" stop-color="#ff4dab" />
+    </linearGradient>
+  </defs>
+  <rect width="640" height="360" rx="28" fill="url(#g2)" />
+  <rect x="80" y="70" width="480" height="220" rx="24" fill="rgba(0,0,0,0.35)" />
+  <rect x="110" y="110" width="420" height="18" rx="9" fill="#ffd9f1" opacity="0.7" />
+  <rect x="110" y="150" width="280" height="18" rx="9" fill="#ffefc2" opacity="0.9" />
+  <rect x="110" y="190" width="360" height="18" rx="9" fill="#ffd9f1" opacity="0.7" />
+  <text x="100" y="310" font-family="'Inter', 'Segoe UI', sans-serif" font-size="26" font-weight="600" fill="#fff">Halliburton Firmware</text>
+  <text x="100" y="342" font-family="'Inter', 'Segoe UI', sans-serif" font-size="20" fill="#ffe4c7">Telemetry & downhole systems</text>
+</svg>

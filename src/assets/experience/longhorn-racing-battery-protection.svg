@@ -1,0 +1,16 @@
+<svg width="640" height="360" viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g4" x1="0" y1="0" x2="640" y2="360" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ff914d" />
+      <stop offset="1" stop-color="#ff3c00" />
+    </linearGradient>
+  </defs>
+  <rect width="640" height="360" rx="28" fill="url(#g4)" />
+  <path d="M120 180c0-56 52-108 120-108h160c68 0 120 52 120 108s-52 108-120 108H240c-68 0-120-52-120-108z" fill="rgba(0,0,0,0.28)" />
+  <rect x="200" y="150" width="240" height="100" rx="28" fill="#fff2e1" opacity="0.85" />
+  <rect x="230" y="180" width="60" height="40" rx="8" fill="#ff914d" opacity="0.8" />
+  <rect x="330" y="180" width="60" height="40" rx="8" fill="#ff914d" opacity="0.8" />
+  <text x="60" y="90" font-family="'Inter', 'Segoe UI', sans-serif" font-size="26" font-weight="700" fill="#ffffff">Longhorn Racing</text>
+  <text x="60" y="125" font-family="'Inter', 'Segoe UI', sans-serif" font-size="22" fill="#ffe7d6">Battery Protection</text>
+  <text x="60" y="320" font-family="'Inter', 'Segoe UI', sans-serif" font-size="20" fill="#ffe7d6">Pack telemetry • HV safety</text>
+</svg>

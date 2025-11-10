@@ -6,6 +6,8 @@ tags:
   - firmware
   - tooling
   - testing
+previewImage: ../../assets/blog/firmware-ci-pipeline.svg
+previewImageAlt: Gradient card illustrating the firmware CI article
 ---
 
 Keeping multiple hardware revisions in sync is hard when firmware images are built by hand. In this write-up I break down the release pipeline that keeps our embedded team fast while maintaining traceability.

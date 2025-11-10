@@ -1,0 +1,14 @@
+<svg width="640" height="360" viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="640" y2="360" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ff805f" />
+      <stop offset="1" stop-color="#851dff" />
+    </linearGradient>
+  </defs>
+  <rect width="640" height="360" rx="28" fill="url(#g1)" />
+  <circle cx="520" cy="80" r="70" fill="rgba(255,255,255,0.12)" />
+  <circle cx="160" cy="310" r="110" fill="rgba(0,0,0,0.12)" />
+  <text x="48" y="120" font-family="'Inter', 'Segoe UI', sans-serif" font-size="28" font-weight="700" fill="#ffffff">AMD Lead Systems</text>
+  <text x="48" y="160" font-family="'Inter', 'Segoe UI', sans-serif" font-size="24" font-weight="500" fill="#f4e3ff">Engineering Intern</text>
+  <text x="48" y="210" font-family="'Inter', 'Segoe UI', sans-serif" font-size="18" fill="#ffe5d7">High-performance silicon and lab validation</text>
+</svg>

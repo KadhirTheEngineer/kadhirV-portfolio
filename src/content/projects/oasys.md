@@ -9,6 +9,8 @@ tech:
 featured: false
 links:
   source: https://github.com/dch777/OASYS
+previewImage: ../../assets/projects/oasys.svg
+previewImageAlt: Gradient artwork for the OASYS airfoil design tool
 ---
 
 ## Summary

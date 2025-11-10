@@ -7,6 +7,8 @@ tech:
   - Computer Architecture
   - Simulation
 featured: false
+previewImage: ../../assets/projects/pipelined-lc3b-simulator.svg
+previewImageAlt: Gradient card for the LC-3b pipeline simulator project
 ---
 
 ## Summary

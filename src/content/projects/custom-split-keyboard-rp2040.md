@@ -9,6 +9,8 @@ tech:
   - Rotary Encoders
   - Firmware Architecture
 featured: false
+previewImage: ../../assets/projects/custom-split-keyboard-rp2040.svg
+previewImageAlt: Gradient card for the RP2040 split keyboard build
 ---
 
 ## Summary

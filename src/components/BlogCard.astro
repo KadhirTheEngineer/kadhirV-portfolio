@@ -6,7 +6,8 @@ interface Props {
 }
 
 const { entry } = Astro.props as Props;
-const { title, summary, publishedAt, tags = [] } = entry.data;
+const { title, summary, publishedAt, tags = [], previewImage, previewImageAlt } = entry.data;
+const previewAlt = previewImageAlt ?? `${title} preview image`;
 const formattedDate = new Intl.DateTimeFormat('en', {
 	month: 'short',
 	day: 'numeric',
@@ -15,28 +16,46 @@ const formattedDate = new Intl.DateTimeFormat('en', {
 ---
 
 <article class="card">
-	<header>
-		<div class="meta">
-			<span>{formattedDate}</span>
-		</div>
-		<h3>
-			<a href={`/blog/${entry.slug}`}>{title}</a>
-		</h3>
-	</header>
-	<p>{summary}</p>
-	{tags.length > 0 && (
-		<div class="tag-list" aria-label="Topics">
-			{tags.map((tag) => (
-				<span class="tag">{tag}</span>
-			))}
-		</div>
+	{previewImage && (
+		<figure class="card-media">
+			<img
+				src={previewImage.src}
+				width={previewImage.width}
+				height={previewImage.height}
+				alt={previewAlt}
+				loading="lazy"
+				decoding="async"
+			/>
+		</figure>
 	)}
-	<p style="margin-top: auto;">
-		<a class="project-link" href={`/blog/${entry.slug}`}>Read article</a>
-	</p>
+	<div class="card-body">
+		<header>
+			<div class="meta">
+				<span>{formattedDate}</span>
+			</div>
+			<h3>
+				<a href={`/blog/${entry.slug}`}>{title}</a>
+			</h3>
+		</header>
+		<p>{summary}</p>
+		{tags.length > 0 && (
+			<div class="tag-list" aria-label="Topics">
+				{tags.map((tag) => (
+					<span class="tag">{tag}</span>
+				))}
+			</div>
+		)}
+		<p class="card-cta">
+			<a class="project-link" href={`/blog/${entry.slug}`}>Read article</a>
+		</p>
+	</div>
 </article>
 
 <style>
+	.card-cta {
+		margin-top: auto;
+	}
+
 	.project-link {
 		font-size: 0.8rem;
 		font-weight: 600;

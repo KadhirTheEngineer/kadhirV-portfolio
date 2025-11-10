@@ -1,0 +1,15 @@
+<svg width="640" height="360" viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g5" x1="0" y1="0" x2="640" y2="360" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#52c234" />
+      <stop offset="1" stop-color="#061700" />
+    </linearGradient>
+  </defs>
+  <rect width="640" height="360" rx="28" fill="url(#g5)" />
+  <polyline points="60,250 140,200 220,230 300,150 380,190 460,110 540,160" fill="none" stroke="#d9ffd6" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+  <circle cx="300" cy="150" r="16" fill="#d9ffd6" opacity="0.8" />
+  <circle cx="460" cy="110" r="14" fill="#d9ffd6" opacity="0.6" />
+  <text x="60" y="90" font-family="'Inter', 'Segoe UI', sans-serif" font-size="28" font-weight="700" fill="#ffffff">Longhorn Racing</text>
+  <text x="60" y="130" font-family="'Inter', 'Segoe UI', sans-serif" font-size="22" fill="#e8ffe3">Vehicle Dynamics</text>
+  <text x="60" y="320" font-family="'Inter', 'Segoe UI', sans-serif" font-size="20" fill="#e8ffe3">Suspension • Data logging</text>
+</svg>

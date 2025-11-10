@@ -11,6 +11,8 @@ tech:
 featured: true
 links:
   source: https://github.com/KadhirTheEngineer/Kaboard
+previewImage: ../../assets/projects/KaboardV2img1.png
+previewImageAlt: Gradient card for the nRF52840 split keyboard project
 ---
 
 ## Summary

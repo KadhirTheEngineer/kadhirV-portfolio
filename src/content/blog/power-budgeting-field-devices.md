@@ -6,6 +6,8 @@ tags:
   - power
   - low-power
   - design
+previewImage: ../../assets/blog/power-budgeting-field-devices.svg
+previewImageAlt: Gradient card for the power budgeting field devices article
 ---
 
 Designing for the field means anticipating every milliwatt that tries to escape. I walk through the spreadsheet and testing workflow I use to model, measure, and validate power budgets.

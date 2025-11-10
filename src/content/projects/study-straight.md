@@ -9,6 +9,8 @@ tech:
   - BLE
   - C
 featured: false
+previewImage: ../../assets/projects/study-straight.svg
+previewImageAlt: Gradient card for the StudyStraight wearable posture coach
 ---
 
 ## Summary

@@ -11,6 +11,8 @@ tech:
 featured: false
 links:
   source: https://github.com/KadhirV/Eproctor
+previewImage: ../../assets/projects/eproctor.svg
+previewImageAlt: Gradient artwork for the eProctor classroom safety app
 ---
 
 ## Summary

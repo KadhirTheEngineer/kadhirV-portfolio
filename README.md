@@ -4,7 +4,7 @@ Personal portfolio built with some nice vibe coding skills and [Astro](https://a
 
 "whats better than a 10x dev? a 10x dev who knows how to use AI" - some wise guy
 
-i am not a 10x yet but ill get that title some day
+i am not a 10x yet but ill get that title some day.
 
 ## Getting Started
 

@@ -1,6 +1,10 @@
 # Electrical Engineering Portfolio (Astro)
 
-Personal portfolio built with [Astro](https://astro.build) for showcasing electrical engineering projects, technical writing, and background.
+Personal portfolio built with some nice vibe coding skills and [Astro](https://astro.build).
+
+"whats better than a 10x dev? a 10x dev who knows how to use AI" - some wise guy
+
+i am not a 10x yet but ill get that title some day.
 
 ## Getting Started
 

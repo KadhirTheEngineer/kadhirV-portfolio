@@ -27,7 +27,6 @@ const rotatingAdjectives = [
 	{ article: 'a', word: 'student' },
 ];
 const adjectivesJSON = JSON.stringify(rotatingAdjectives);
-const base = import.meta.env.BASE_URL;
 ---
 
 <Layout
@@ -51,8 +50,8 @@ const base = import.meta.env.BASE_URL;
 					<p class="hero-secondary">Crafting dependable hardware, firmware, and power systems beyond the lab.</p>
 					<p class="hero-summary">{heroSummary}</p>
 					<div class="hero-actions">
-						<a class="button primary" href={`${base}projects`}>View projects</a>
-						<a class="button secondary" href={`${base}experience`}>Experience</a>
+						<a class="button primary" href="/projects">View projects</a>
+						<a class="button secondary" href="/experience">Experience</a>
 					</div>
 				</div>
 				<div class="hero-portrait">
@@ -86,7 +85,7 @@ const base = import.meta.env.BASE_URL;
 		</div>
 		{projects.length > 3 && (
 			<p style="margin-top: 1.5rem;">
-				<a class="button secondary" href={`${base}projects`}>Browse all projects</a>
+				<a class="button secondary" href="/projects">Browse all projects</a>
 			</p>
 		)}
 	</section>
@@ -125,7 +124,7 @@ const base = import.meta.env.BASE_URL;
 				return (
 					<article class={`experience-item ${position}`}>
 						<div class="experience-dot" aria-hidden="true"></div>
-						<a class="experience-card" href={`${base}experience/${exp.slug}`}>
+						<a class="experience-card" href={`/experience/${exp.slug}`}>
 							<header>
 								<p class="experience-date">
 									<span>{start}</span>
@@ -152,7 +151,7 @@ const base = import.meta.env.BASE_URL;
 			})}
 		</div>
 		<p class="experience-cta">
-			Want the full story? <a href={`${base}experience`}>Browse the complete experience timeline →</a>
+			Want the full story? <a href="/experience">Browse the complete experience timeline →</a>
 		</p>
 	</section>
 	<script type="module" data-words={adjectivesJSON}>

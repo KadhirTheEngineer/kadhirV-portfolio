@@ -1,5 +1,5 @@
 ---
-title: Kaboard - a wireless 36 key split keyboard
+title: Kaboard V2 - a wireless 36 key split keyboard
 publishedAt: 2025-07-01
 description: Ultra-low-profile wireless split keyboard with custom PCBs, Zephyr firmware, and daily usability.
 tech:
@@ -49,7 +49,17 @@ It may not be the most performance oriented apprach (edge triggered interrupt ba
 ![Diode matrix](../../assets/projects/kaboard-diode-matrix-img4.png)
 
 ## Firmware
-This is all based on zephyr
+This is all based on zephyr RTOS. ZMK is open source keyboard firmware. I had to mess around with some stuff to get the software defiend sleep state to work on the nrf52840 board. Work in progress. I will update this section when I finally stop over discharging my battery.
+
+## CAD
+The entire thing is 3d printed and designed by yours truly. 
+
+![Initial prototype image](../../assets/projects/kaboard-cad-img1.png)
+*yes its small. but as the real ones say, size doesnt matter.*
+![stackup cad](../../assets/projects/kaboard-cad-img3.png)
+
+## Final stackup
+![Final image](../../assets/projects/kaboard-cad-img2.png)
 
 ## Highlights
 - Designed custom PCBs around the nRF52840 to enable sub-16 mm stack height while maintaining full mechanical key travel.

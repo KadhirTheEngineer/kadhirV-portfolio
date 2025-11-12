@@ -9,8 +9,8 @@ tech:
   - UART
   - Embedded Graphics
 featured: false
-previewImage: ../../assets/projects/streetfighter-ti-mspm0-plus.svg
-previewImageAlt: Gradient card for the Street Fighter MSPM0+ port
+previewImage: ../../assets/projects/streetfighter-img1.png
+previewImageAlt: Street Fighter MSPM0+ image
 ---
 
 ## Summary
@@ -23,6 +23,18 @@ I re-created a Street Fighter-style game for the MSPM0+ platform, squeezing arca
 - Optimized frame rendering with lookup tables, boosting average FPS by 500%.
 - Implemented a full-duplex UART link to a companion microcontroller that generates game audio through a 5-bit DAC.
 
-## Outcome
 
+## Demo
+## Demo
+<div class="video-embed">
+	<iframe
+		src="https://youtu.be/YTMhDttLUfQ?si=O6ubjo_pdcQoU1H_"
+		title="AstroDoodle.party demo"
+		frameborder="0"
+		allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+		allowfullscreen
+	></iframe>
+</div>
+
+## Outcome
 The project demonstrates how tight control over memory, timing, and peripherals can unlock complex gameplay on modest microcontrollers.

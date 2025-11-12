@@ -8,7 +8,7 @@ tech:
   - OLED
   - Rotary Encoders
   - Firmware Architecture
-featured: false
+featured: true
 previewImage: ../../assets/projects/KLOR2.png
 previewImageAlt: RP2040 split keyboard build
 ---

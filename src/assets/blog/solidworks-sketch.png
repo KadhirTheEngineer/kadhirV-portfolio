@@ -1,0 +1,17 @@
+<svg width="480" height="270" viewBox="0 0 480 270" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2E3192" />
+      <stop offset="100%" stop-color="#1BFFFF" />
+    </linearGradient>
+  </defs>
+  <rect width="480" height="270" rx="24" fill="url(#grad)" />
+  <path d="M120 80h240c6.6 0 12 5.4 12 12v86c0 6.6-5.4 12-12 12H120c-6.6 0-12-5.4-12-12V92c0-6.6 5.4-12 12-12z" fill="rgba(0,0,0,0.35)" stroke="rgba(255,255,255,0.6)" stroke-width="2" />
+  <path d="M160 110l40 50 40-30 40 30 40-60" fill="none" stroke="#F7F7F7" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+  <circle cx="160" cy="110" r="8" fill="#F7F7F7" />
+  <circle cx="200" cy="160" r="8" fill="#F7F7F7" />
+  <circle cx="240" cy="130" r="8" fill="#F7F7F7" />
+  <circle cx="280" cy="160" r="8" fill="#F7F7F7" />
+  <circle cx="320" cy="100" r="8" fill="#F7F7F7" />
+  <text x="40" y="230" font-family="'Courier Prime', 'Courier New', monospace" font-size="28" fill="#FFFFFF" opacity="0.9">SOLIDWORKS SKETCH TUTORIAL</text>
+</svg>

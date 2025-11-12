@@ -29,6 +29,9 @@ const blog = defineCollection({
 			tags: z.array(z.string()).default([]),
 			previewImage: image().optional(),
 			previewImageAlt: z.string().optional(),
+			isVideo: z.boolean().default(false),
+			videoUrl: z.string().url().optional(),
+			videoDescription: z.string().optional(),
 		}),
 });
 

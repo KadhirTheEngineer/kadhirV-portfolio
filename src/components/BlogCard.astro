@@ -6,7 +6,24 @@ interface Props {
 }
 
 const { entry } = Astro.props as Props;
-const { title, summary, publishedAt, tags = [], previewImage, previewImageAlt } = entry.data;
+const { title, summary, publishedAt, tags = [], previewImage, previewImageAlt, isVideo = false, videoUrl } = entry.data;
+const extractVideoId = (url?: string) => {
+	if (!url) return undefined;
+	try {
+		const short = url.match(/youtu\.be\/([^?]+)/);
+		if (short) return short[1];
+		const long = url.match(/[?&]v=([^&]+)/);
+		if (long) return long[1];
+		const embed = url.match(/youtube\.com\/embed\/([^?]+)/);
+		if (embed) return embed[1];
+	} catch {
+		return undefined;
+	}
+	return undefined;
+};
+const videoId = isVideo ? extractVideoId(videoUrl) : undefined;
+const derivedPreview = isVideo && videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : undefined;
+
 const previewAlt = previewImageAlt ?? `${title} preview image`;
 const formattedDate = new Intl.DateTimeFormat('en', {
 	month: 'short',
@@ -16,12 +33,12 @@ const formattedDate = new Intl.DateTimeFormat('en', {
 ---
 
 <article class="card">
-	{previewImage && (
+	{(previewImage || derivedPreview) && (
 		<figure class="card-media">
 			<img
-				src={previewImage.src}
-				width={previewImage.width}
-				height={previewImage.height}
+				src={derivedPreview ?? previewImage?.src}
+				width="480"
+				height="270"
 				alt={previewAlt}
 				loading="lazy"
 				decoding="async"

@@ -12,11 +12,10 @@ const posts = (await getCollection('blog')).sort(
 	<section class="container">
 		<div class="section-heading">
 			<h2>Blog</h2>
-			<span>Latest Writing</span>
+			<span>A collection of my blogs, vlogs, and youtube videos</span>
 		</div>
 		<p style="color: var(--color-muted); max-width: 68ch;">
-			Field notes, design patterns, and teardown write-ups focused on embedded systems, power
-			engineering, and hardware bring-up.
+			A big collection of my vlogs, blogs, and youtube videos I've made over the years. This website uses the Youtube API and automatically pulls from my channel which I think is really cool.
 		</p>
 		{posts.length ? (
 			<div class="grid" style="margin-top: 2.5rem;">

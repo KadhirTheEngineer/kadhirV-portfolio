@@ -115,7 +115,7 @@ a:focus-visible {
 
 
 .site-main {
-	padding: clamp(3.5rem, 6vw, 5.5rem) 0 clamp(5rem, 8vw, 6.5rem);
+	padding: 0 0 clamp(5rem, 8vw, 6.5rem);
 	display: flex;
 	flex-direction: column;
 	gap: clamp(4rem, 6vw, 6rem);
@@ -146,35 +146,96 @@ section {
 	letter-spacing: 0.2em;
 }
 
-
-
-
 .hero {
 	position: relative;
-	padding: clamp(3rem, 7vw, 5rem) 0 clamp(8rem, 18vh, 12rem);
-	overflow: visible;
+	min-height: 95vh;
+	padding: clamp(2rem, 4vw, 3.4rem) 0 clamp(1.8rem, 5vh, 3rem);
+	display: flex;
+	align-items: center;
+	overflow: hidden;
+}
+
+.hero::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background:
+		radial-gradient(circle at 20% 25%, rgba(93, 138, 255, 0.35), transparent 55%),
+		radial-gradient(circle at 80% 10%, rgba(10, 237, 255, 0.22), transparent 45%),
+		linear-gradient(135deg, rgba(9, 11, 29, 0.96), rgba(6, 8, 23, 0.96));
+	z-index: 0;
+}
+
+.hero::after {
+	content: '';
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: clamp(80px, 12vh, 140px);
+	background: linear-gradient(180deg, rgba(10, 12, 28, 0) 0%, rgba(10, 12, 28, 0.95) 70%, rgba(10, 12, 28, 1) 100%);
+	z-index: 0;
 }
 
 .hero-scale {
 	position: relative;
+	width: 100%;
+	z-index: 1;
+}
+
+.hero-scale .container {
 	width: min(1200px, 94vw);
-	margin: 0 auto;
-	margin-bottom: calc(clamp(0.5rem, 4vw, 1.5rem) + var(--hero-extra-space, 0px));
-	overflow: visible;
-	--hero-progress: 0;
-	--hero-extra-space: 0px;
-	transform: scale(calc(1.25 - 0.32 * var(--hero-progress)));
-	transform-origin: center top;
-	transition: transform 0.3s ease;
-	will-change: transform;
+}
+
+.scroll-indicator {
+	position: absolute;
+	left: 50%;
+	bottom: clamp(-3.5rem, -10vh, -1.5rem);
+	transform: translate(-50%, 0);
+	display: inline-flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.3rem;
+	color: var(--color-muted);
+	font-size: 0.72rem;
+	letter-spacing: 0.4em;
+	text-transform: uppercase;
+	text-decoration: none;
+	opacity: 0.85;
+	transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.scroll-indicator svg {
+	width: 22px;
+	height: 22px;
+	fill: currentColor;
+	animation: scrollBounce 1.6s ease-in-out infinite;
+}
+
+.scroll-indicator:hover,
+.scroll-indicator:focus-visible {
+	opacity: 1;
+	transform: translate(-50%, -6px);
+}
+
+@keyframes scrollBounce {
+	0% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(6px);
+	}
+	100% {
+		transform: translateY(0);
+	}
 }
 
 .hero-grid {
 	position: relative;
 	z-index: 1;
 	display: grid;
-	grid-template-columns: minmax(0, 1.05fr) minmax(260px, 0.9fr);
-	gap: clamp(2rem, 5vw, 4rem);
+	grid-template-columns: minmax(0, 1.15fr) minmax(240px, 0.85fr);
+	gap: clamp(1.75rem, 4vw, 3.5rem);
 	align-items: center;
 }
 
@@ -182,7 +243,7 @@ section {
 	display: flex;
 	flex-direction: column;
 	gap: clamp(1rem, 2.4vw, 1.75rem);
-	max-width: 36rem;
+	max-width: 46rem;
 }
 
 .hero-overline {
@@ -267,10 +328,11 @@ section {
 	display: grid;
 	justify-items: center;
 	gap: 1.5rem;
+	justify-self: center;
 }
 
 .portrait-frame {
-	width: min(340px, 32vw);
+	width: clamp(280px, 32vw, 420px);
 	aspect-ratio: 1 / 1;
 	margin: 0;
 	border-radius: 28px;
@@ -333,6 +395,71 @@ section {
 	width: 22px;
 	height: 22px;
 	fill: currentColor;
+}
+
+.skills-section {
+	margin-top: clamp(1.4rem, 3vw, 2.5rem);
+	margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+.skills-heading {
+	display: flex;
+	align-items: center;
+	gap: 1.25rem;
+	color: var(--color-muted);
+	text-transform: uppercase;
+	letter-spacing: 0.35em;
+	font-size: clamp(0.95rem, 2vw, 1.2rem);
+	font-weight: 600;
+}
+
+.skills-divider {
+	flex: 1;
+	height: 1px;
+	background: rgba(148, 163, 184, 0.3);
+}
+
+.skills-marquee {
+	margin-top: 0.85rem;
+	overflow: hidden;
+}
+
+.skills-track {
+	display: flex;
+	width: max-content;
+	animation: skillsTicker 18s linear infinite;
+	will-change: transform;
+}
+
+.skills-loop {
+	display: inline-flex;
+	gap: 0.85rem;
+	padding-right: 0.85rem;
+	flex-shrink: 0;
+}
+
+.skill-pill {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.4rem 1.2rem;
+	border-radius: 999px;
+	border: 1px solid rgba(148, 163, 184, 0.35);
+	background: rgba(15, 23, 42, 0.75);
+	color: var(--color-text);
+	font-size: 0.85rem;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	white-space: nowrap;
+}
+
+@keyframes skillsTicker {
+	0% {
+		transform: translateX(0);
+	}
+	100% {
+		transform: translateX(-50%);
+	}
 }
 
 .experience-page {
@@ -557,13 +684,13 @@ section {
 
 .grid {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-	gap: 1.75rem;
+	grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+	gap: 1.1rem;
 }
 
 .card {
 	position: relative;
-	padding: 1.75rem;
+	padding: 1.25rem;
 	background: var(--color-card);
 	border: 1px solid rgba(148, 163, 184, 0.14);
 	border-radius: var(--radius-lg);
@@ -602,9 +729,9 @@ section {
 }
 
 .card-media {
-	margin: -0.25rem;
-	margin-bottom: 0.5rem;
-	border-radius: calc(var(--radius-lg) - 0.5rem);
+	margin: 0;
+	margin-bottom: 0.35rem;
+	border-radius: calc(var(--radius-lg) - 0.8rem);
 	overflow: hidden;
 	border: 1px solid rgba(255, 255, 255, 0.06);
 	background: rgba(8, 14, 35, 0.9);
@@ -697,14 +824,13 @@ section {
 	}
 
 	.hero {
-		padding: clamp(3rem, 9vw, 4.5rem) clamp(1.2rem, 6vw, 1.8rem) clamp(5rem, 14vw, 6.5rem);
+		min-height: auto;
+		padding: clamp(3rem, 9vw, 4.5rem) clamp(1.2rem, 6vw, 1.8rem) clamp(4rem, 12vw, 5rem);
 	}
 
-	.hero-scale {
+	.hero-grid {
 		width: 100%;
-		margin-bottom: clamp(3rem, 16vw, 5rem);
-		--hero-extra-space: 0px;
-		transform: none !important;
+		padding-inline: clamp(1rem, 4vw, 2rem);
 	}
 
 	.hero-grid {
@@ -724,6 +850,10 @@ section {
 
 	.portrait-frame {
 		width: min(260px, 68vw);
+	}
+
+	.scroll-indicator {
+		display: none;
 	}
 
 	.site-main {

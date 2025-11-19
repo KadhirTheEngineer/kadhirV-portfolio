@@ -27,6 +27,20 @@ const rotatingAdjectives = [
 	{ article: 'a', word: 'student' },
 ];
 const adjectivesJSON = JSON.stringify(rotatingAdjectives);
+const skills = [
+	'Python',
+	'SolidWorks',
+	'STM32',
+	'Power Systems',
+	'C/C++',
+	'Zephyr RTOS',
+	'KiCad',
+	'Embedded Linux',
+	'Lab Automation',
+	'PCB Layout',
+	'FPGA',
+	'Data Visualization',
+];
 ---
 
 <Layout
@@ -34,7 +48,7 @@ const adjectivesJSON = JSON.stringify(rotatingAdjectives);
 	description="just a chill guy documenting his chill projects and expereinces"
 >
 	<section class="hero" id="home">
-		<div class="hero-scale" data-hero-scale>
+		<div class="hero-scale">
 			<div class="container hero-grid">
 				<div class="hero-intro">
 					<!-- <p class="hero-overline">Electronics & Systems Engineer</p> -->
@@ -88,6 +102,33 @@ const adjectivesJSON = JSON.stringify(rotatingAdjectives);
 							</svg>
 						</a>
 					</div>
+				</div>
+			</div>
+			<a class="scroll-indicator" href="#projects" aria-label="Scroll to projects">
+				<span>Scroll</span>
+				<svg viewBox="0 0 24 24" role="img" aria-hidden="true">
+					<path d="M12 16.5L5 9.5l1.4-1.4L12 13.7l5.6-5.6L19 9.5z" />
+				</svg>
+			</a>
+		</div>
+	</section>
+	<section class="skills-section" aria-label="toolbox">
+		<div class="container">
+			<div class="skills-heading">
+				<span>What I do</span>
+				<div class="skills-divider"></div>
+			</div>
+			<div class="skills-marquee">
+				<div class="skills-track" role="list">
+					{[0, 1].map((loopIndex) => (
+						<div class="skills-loop" aria-hidden={loopIndex === 1}>
+							{skills.map((skill) => (
+								<span class="skill-pill" role="listitem">
+									{skill}
+								</span>
+							))}
+						</div>
+					))}
 				</div>
 			</div>
 		</div>
@@ -179,15 +220,15 @@ const adjectivesJSON = JSON.stringify(rotatingAdjectives);
 			const script = document.querySelector('script[data-words]');
 			const adjectives = JSON.parse(script?.dataset.words ?? '[]');
 			const rotator = document.querySelector('[data-rotator]');
-			const scaleTarget = document.querySelector('[data-hero-scale]');
+
+			if (!rotator || adjectives.length <= 1) {
+				return;
+			}
 
 			let index = 0;
 			let timer;
 
 			const tick = () => {
-				if (!rotator || adjectives.length <= 1) {
-					return;
-				}
 				rotator.classList.add('is-changing');
 				window.setTimeout(() => {
 					index = (index + 1) % adjectives.length;
@@ -197,72 +238,18 @@ const adjectivesJSON = JSON.stringify(rotatingAdjectives);
 				}, 220);
 			};
 
-			if (rotator && adjectives.length > 1) {
-				const current = adjectives[0];
-				rotator.textContent = `${current.article} ${current.word}`;
-				timer = window.setInterval(tick, 2600);
-				document.addEventListener('visibilitychange', () => {
-					if (document.hidden && timer) {
-						window.clearInterval(timer);
-						timer = undefined;
-					} else if (!document.hidden && !timer) {
-						timer = window.setInterval(tick, 2600);
-					}
-				});
-			}
+			const current = adjectives[0];
+			rotator.textContent = `${current.article} ${current.word}`;
+			timer = window.setInterval(tick, 2600);
 
-			if (scaleTarget) {
-				scaleTarget.style.setProperty('--hero-progress', '0');
-				scaleTarget.style.setProperty('--hero-extra-space', '0px');
-
-				let heroTop = 0;
-				let heroHeight = 0;
-				const shrinkDistance = () => heroHeight * 0.75 || 1;
-				const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
-				const baseScale = 1.25;
-				const scaleDelta = 0.32;
-				const compactQuery = window.matchMedia('(max-width: 720px)');
-				const isCompact = () => compactQuery.matches;
-
-				const measure = () => {
-					const rect = scaleTarget.getBoundingClientRect();
-					heroHeight = scaleTarget.offsetHeight || rect.height;
-					heroTop = window.scrollY + rect.top;
-				};
-
-				const updateScale = () => {
-					if (!heroHeight) return;
-					if (isCompact()) {
-						scaleTarget.style.setProperty('--hero-progress', '0');
-						scaleTarget.style.setProperty('--hero-extra-space', '0px');
-						return;
-					}
-					const scroll = window.scrollY;
-					const progress = clamp((scroll - heroTop) / shrinkDistance(), 0, 1);
-					scaleTarget.style.setProperty('--hero-progress', progress.toFixed(4));
-					const scaleValue = baseScale - scaleDelta * progress;
-					const extraSpace = Math.max(0, heroHeight * (scaleValue - 1));
-					scaleTarget.style.setProperty('--hero-extra-space', `${extraSpace.toFixed(2)}px`);
-				};
-
-				measure();
-				updateScale();
-
-				const handleResize = () => {
-					measure();
-					updateScale();
-				};
-
-				window.addEventListener('resize', handleResize);
-				window.addEventListener('scroll', updateScale, { passive: true });
-				window.addEventListener('load', handleResize);
-
-				if (compactQuery.addEventListener) {
-					compactQuery.addEventListener('change', handleResize);
-				} else if (compactQuery.addListener) {
-					compactQuery.addListener(handleResize);
+			document.addEventListener('visibilitychange', () => {
+				if (document.hidden && timer) {
+					window.clearInterval(timer);
+					timer = undefined;
+				} else if (!document.hidden && !timer) {
+					timer = window.setInterval(tick, 2600);
 				}
-			}
+			});
 		};
 
 		if (document.readyState === 'loading') {

@@ -30,20 +30,34 @@ const currentYear = new Date().getFullYear();
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 		<meta name="description" content={description} />
+		<script is:inline>
+			(() => {
+				try {
+					const savedTheme = localStorage.getItem('portfolio-theme');
+					if (savedTheme === 'light') document.documentElement.dataset.theme = 'light';
+				} catch {}
+			})();
+		</script>
 	</head>
 	<body>
 		<header class="site-header">
 			<div class="container">
 				<a class="brand" href="/">Kadhir's Portfolio</a>
-				<nav aria-label="Primary">
-					<ul>
-						{navLinks.map((link) => (
-							<li>
-								<a href={link.href}>{link.label}</a>
-							</li>
-						))}
-					</ul>
-				</nav>
+				<div class="header-actions">
+					<nav aria-label="Primary">
+						<ul>
+							{navLinks.map((link) => (
+								<li>
+									<a href={link.href}>{link.label}</a>
+								</li>
+							))}
+						</ul>
+					</nav>
+					<button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to light mode" aria-pressed="false">
+						<span class="theme-toggle-icon" aria-hidden="true">◐</span>
+						<span data-theme-label>Light</span>
+					</button>
+				</div>
 			</div>
 		</header>
 		<main class="site-main">
@@ -57,5 +71,28 @@ const currentYear = new Date().getFullYear();
 				</p>
 			</div>
 		</footer>
+		<script is:inline>
+			(() => {
+				const button = document.querySelector('[data-theme-toggle]');
+				if (!button) return;
+				const label = button.querySelector('[data-theme-label]');
+				const sync = () => {
+					const isLight = document.documentElement.dataset.theme === 'light';
+					button.setAttribute('aria-pressed', String(isLight));
+					button.setAttribute('aria-label', `Switch to ${isLight ? 'dark' : 'light'} mode`);
+					if (label) label.textContent = isLight ? 'Dark' : 'Light';
+				};
+				button.addEventListener('click', () => {
+					const isLight = document.documentElement.dataset.theme === 'light';
+					if (isLight) delete document.documentElement.dataset.theme;
+					else document.documentElement.dataset.theme = 'light';
+					try {
+						localStorage.setItem('portfolio-theme', isLight ? 'dark' : 'light');
+					} catch {}
+					sync();
+				});
+				sync();
+			})();
+		</script>
 	</body>
 </html>

@@ -17,6 +17,17 @@ const experiences = (await getCollection('experience')).sort(
 	(a, b) => b.data.startDate.valueOf() - a.data.startDate.valueOf()
 );
 
+const nowUpdate = (await getCollection('now')).find((entry) => entry.slug === 'current');
+const NowContent = nowUpdate ? (await nowUpdate.render()).Content : undefined;
+const nowUpdatedLabel = nowUpdate
+	? new Intl.DateTimeFormat('en', {
+			month: 'long',
+			day: 'numeric',
+			year: 'numeric',
+			timeZone: 'UTC',
+		}).format(nowUpdate.data.updatedAt)
+	: undefined;
+
 const heroSummary =
 	"I've worked on everything from HV Battery Management Systems for Solar racecars to validating next-gen Ryzen CPUs at AMD. When I'm not tinkering with electronics, you'll find me powerlifiting, making keyboards, or exploring nature.";
 const rotatingAdjectives = [
@@ -69,6 +80,13 @@ const skills = [
 					</div>
 				</div>
 				<div class="hero-portrait">
+					{nowUpdate && (
+						<a class="thought-bubble" href="#now" aria-label={`Currently thinking about: ${nowUpdate.data.thought} Jump to what I am up to right now.`}>
+							<span class="thought-label">Currently thinking about</span>
+							<strong>{nowUpdate.data.thought}</strong>
+							<span class="thought-link">See what I'm up to ↓</span>
+						</a>
+					)}
 					<figure class="portrait-frame">
 						<img src={portrait.src} alt="Portrait of Kadhir" loading="lazy" decoding="async" />
 					</figure>
@@ -112,6 +130,19 @@ const skills = [
 			</a>
 		</div>
 	</section>
+	{nowUpdate && NowContent && (
+		<section id="now" class="container home-now" aria-labelledby="home-now-title">
+			<div class="home-now-copy">
+				<p class="home-now-eyebrow">Current status</p>
+				<h2 id="home-now-title">{nowUpdate.data.title}</h2>
+				<p class="home-now-thought">{nowUpdate.data.thought}</p>
+				{nowUpdatedLabel && <span>Updated {nowUpdatedLabel}</span>}
+				<div class="home-now-body">
+					<NowContent />
+				</div>
+			</div>
+		</section>
+	)}
 	<section class="skills-section" aria-label="toolbox">
 		<div class="container">
 			<div class="skills-heading">

@@ -48,4 +48,12 @@ const experience = defineCollection({
 	}),
 });
 
-export const collections = { projects, blog, experience };
+const now = defineCollection({
+	schema: z.object({
+		title: z.string(),
+		thought: z.string(),
+		updatedAt: z.date(),
+	}),
+});
+
+export const collections = { projects, blog, experience, now };

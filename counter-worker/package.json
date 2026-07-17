@@ -1,0 +1,14 @@
+{
+  "name": "portfolio-visitor-counter",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:init:local": "wrangler d1 execute portfolio-visitor-counter --local --file=schema.sql",
+    "db:init:remote": "wrangler d1 execute portfolio-visitor-counter --remote --file=schema.sql"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "kadhir-portfolio-counter",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-07-16",
+  "workers_dev": true,
+  "preview_urls": false,
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "portfolio-visitor-counter",
+      "database_id": "3d816e29-b9a5-45c1-8e15-ab66a5c0bc93"
+    }
+  ],
+  "vars": {
+    "ALLOWED_ORIGIN": "https://kadhir.me"
+  }
+}

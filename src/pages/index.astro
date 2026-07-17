@@ -38,6 +38,9 @@ const rotatingAdjectives = [
 	{ article: 'a', word: 'student' },
 ];
 const adjectivesJSON = JSON.stringify(rotatingAdjectives);
+const visitorCounterUrl =
+	import.meta.env.PUBLIC_VISITOR_COUNTER_URL ??
+	'https://kadhir-portfolio-counter.kadhir-vivek.workers.dev';
 const skills = [
 	'Python',
 	'SolidWorks',
@@ -64,7 +67,9 @@ const skills = [
 				<div class="hero-intro">
 					<!-- <p class="hero-overline">Electronics & Systems Engineer</p> -->
 					<h1 class="hero-title">
-						<span class="hero-greeting">Hey, I'm</span>
+						<span class="hero-greeting">
+							Hey, <span class="visitor-greeting" data-visitor-number aria-live="polite">returning visitor</span>, I'm
+						</span>
 						<span class="hero-name">Kadhir</span>
 					</h1>
 					<p class="hero-tagline">
@@ -130,6 +135,7 @@ const skills = [
 			</a>
 		</div>
 	</section>
+	<div class="visitor-trigger" data-visitor-trigger aria-hidden="true"></div>
 	{nowUpdate && NowContent && (
 		<section id="now" class="container home-now" aria-labelledby="home-now-title">
 			<div class="home-now-copy">
@@ -287,6 +293,85 @@ const skills = [
 			document.addEventListener('DOMContentLoaded', initHero, { once: true });
 		} else {
 			initHero();
+		}
+	</script>
+	<script type="module" data-counter-url={visitorCounterUrl}>
+		const numberElement = document.querySelector('[data-visitor-number]');
+		const trigger = document.querySelector('[data-visitor-trigger]');
+		const script = document.querySelector('script[data-counter-url]');
+		const endpoint = script?.dataset.counterUrl ?? '';
+		const isLocal = !endpoint;
+		const localCountKey = 'portfolio-local-visitor-count';
+		const countedKey = 'portfolio-visitor-counted';
+
+		const ordinalSuffix = (count) => {
+			const remainder100 = count % 100;
+			if (remainder100 >= 11 && remainder100 <= 13) return 'th';
+			switch (count % 10) {
+				case 1: return 'st';
+				case 2: return 'nd';
+				case 3: return 'rd';
+				default: return 'th';
+			}
+		};
+		const formatVisitor = (count) => `${count}${ordinalSuffix(count)} visitor`;
+		const showCount = (count) => {
+			if (numberElement && Number.isFinite(count)) numberElement.textContent = formatVisitor(count);
+		};
+
+		const readCount = async () => {
+			if (isLocal) {
+				const count = Number(localStorage.getItem(localCountKey) ?? '19');
+				showCount(count + 1);
+				return;
+			}
+
+			try {
+				const response = await fetch(endpoint, { headers: { Accept: 'application/json' } });
+				if (!response.ok) return;
+				const data = await response.json();
+				showCount(Number(data.next ?? data.count));
+			} catch {
+				// The counter is decorative; network failures should never affect navigation.
+			}
+		};
+
+		const recordVisit = async () => {
+			if (sessionStorage.getItem(countedKey)) return;
+			sessionStorage.setItem(countedKey, 'true');
+
+			if (isLocal) {
+				const next = Number(localStorage.getItem(localCountKey) ?? '19') + 1;
+				localStorage.setItem(localCountKey, String(next));
+				showCount(next);
+				return;
+			}
+
+			try {
+				const response = await fetch(endpoint, {
+					method: 'POST',
+					headers: { Accept: 'application/json' },
+				});
+				if (!response.ok) return;
+				const data = await response.json();
+				showCount(Number(data.count));
+			} catch {
+				// Keep the provisional number when the counter service is unavailable.
+			}
+		};
+
+		readCount();
+
+		if (trigger) {
+			const observer = new IntersectionObserver(
+				(entries) => {
+					if (!entries.some((entry) => entry.isIntersecting)) return;
+					observer.disconnect();
+					recordVisit();
+				},
+				{ threshold: 0.5 }
+			);
+			observer.observe(trigger);
 		}
 	</script>
 </Layout>
